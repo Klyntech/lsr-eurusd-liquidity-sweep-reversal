@@ -1,26 +1,3 @@
-# --- Data ---
-# Raw tick data from Dukascopy (large, must be re-downloaded)
-data/raw/
-# Processed OHLC research dataset (2.3 MB, generated from raw)
-data/processed/eurusd_1h_research.csv
-data/processed/eurusd_1h_combined_raw_source.csv
-
-# --- Generated output (runtime artifacts) ---
-data/processed/trades.csv
-data/processed/trades_real_data.csv
-data/processed/performance_summary.csv
-data/processed/equity_curve.csv
-data/processed/equity_curve_real_data.csv
-data/processed/reversal_distances.csv
-data/processed/walk_forward_results.csv
-data/processed/cost_stress_results.csv
-data/processed/verification_report.md
-data/processed/verification_stats.json
-data/processed/data_quality_report.json
-
-# --- Analysis outputs ---
-analysis/output/
-
 # --- Python ---
 __pycache__/
 *.py[cod]

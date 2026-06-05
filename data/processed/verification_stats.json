@@ -1,0 +1,13 @@
+{
+  "total_candles": 44745,
+  "avg_candle_range": 0.000954,
+  "avg_candle_range_pips": 9.54,
+  "median_candle_range": 0.00075,
+  "max_candle_range": 0.02174,
+  "min_candle_range": 0.0,
+  "trading_days": 2246,
+  "trading_weeks": 387,
+  "trading_months": 90,
+  "price_range_low": 0.95357,
+  "price_range_high": 1.23494
+}

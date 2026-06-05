@@ -1,0 +1,84 @@
+{
+  "data_source": "Dukascopy (via dukascopy-node)",
+  "source_type": "tick-aggregated bid prices",
+  "instrument": "EURUSD",
+  "timeframe": "H1",
+  "price_type": "bid",
+  "generated_at": "2026-06-05 07:50:41 UTC",
+  "date_coverage": {
+    "start_date": "2019-01-01 22:00:00",
+    "end_date": "2026-06-05 06:00:00",
+    "calendar_days": 2711,
+    "calendar_years": 7.4
+  },
+  "row_counts": {
+    "total_rows": 44745,
+    "raw_downloaded": 65118,
+    "duplicates_removed": 2208,
+    "flat_bars_removed": 18165,
+    "weekend_bars": 983,
+    "weekday_bars": 43762
+  },
+  "data_completeness": {
+    "expected_trading_hours": 46474,
+    "actual_bars": 44745,
+    "trading_fill_rate_pct": 96.3,
+    "weekday_missing_bars": 2735,
+    "weekday_fill_rate_pct": 94.1,
+    "note": "Missing bars are primarily weekend closures (Saturday = 0 bars). Forex market operates Sunday 22:00 UTC to Friday 22:00 UTC.",
+    "interpretation": "96.3% fill rate for trading hours is excellent for free data."
+  },
+  "price_statistics": {
+    "avg_candle_range": 0.001341,
+    "avg_candle_range_pips": 13.41,
+    "median_candle_range": 0.00106,
+    "median_candle_range_pips": 10.6,
+    "max_candle_range": 0.02174,
+    "max_candle_range_pips": 217.4,
+    "min_candle_range": 2e-05,
+    "min_candle_range_pips": 0.2,
+    "price_low": 0.95357,
+    "price_high": 1.23494,
+    "price_range_pips": 2813.7
+  },
+  "spread": {
+    "note": "Bid-only data. No native spread column available.",
+    "estimated_typical_spread_pips": 0.2,
+    "estimated_spread_source": "Dukascopy typical EURUSD spread during liquid hours"
+  },
+  "bars_by_day_of_week": {
+    "Monday": 8940,
+    "Tuesday": 8974,
+    "Wednesday": 8925,
+    "Thursday": 8962,
+    "Friday": 7961,
+    "Saturday": 0,
+    "Sunday": 983
+  },
+  "validation": {
+    "ohlc_consistency": "PASS",
+    "high_ge_max_open_close": true,
+    "low_le_min_open_close": true,
+    "high_ge_low": true,
+    "all_prices_positive": true,
+    "no_duplicates": true,
+    "sorted_ascending": true,
+    "no_future_timestamps": true,
+    "no_nan_in_ohlc": true
+  },
+  "known_limitations": [
+    "Bid-only prices (no ask/spread data natively available)",
+    "Tick-to-H1 aggregation done by dukascopy-node server-side",
+    "Weekend gaps are expected and correct (forex market closure)",
+    "No volume data included",
+    "First bar is 2019-01-01 22:00 (Sunday night open, forex convention)"
+  ],
+  "backtest_readiness": {
+    "signal_generation": true,
+    "walk_forward_testing": true,
+    "monte_carlo_testing": true,
+    "cost_modeling": true,
+    "trade_logging": true,
+    "institutional_grade": "Research-grade. Suitable for strategy development, walk-forward analysis, and cost sensitivity testing. Not suitable for live execution without broker-specific spread data."
+  }
+}
