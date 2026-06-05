@@ -1,0 +1,291 @@
+============================================================================
+  LSR-EH1 EDGE CHARACTERIZATION — COMPREHENSIVE REPORT
+  Four hypothesis tests. NO parameter optimization.
+============================================================================
+
+  Test 1: Continuous sweep depth (0.50, 0.75, 1.00, 1.25)
+    Verifies monotonic PF improvement with deeper sweeps.
+
+  Test 2: Sweep-depth deciles (D1-D10)
+    Structural relationship test — stronger than single threshold.
+
+  Test 3: Time exit duration (4, 6, 8, 10, 12 bars)
+    With and without profit target. Finds optimal holding period.
+
+  Test 4: MAE/MFE analysis
+    Maximum adverse/favorable excursion — the highest-value
+    remaining analysis for stop/target calibration.
+
+  All tests use sweep >= 0.5 ATR filter except Test 1 and Test 2
+  which sweep across multiple thresholds on all 400 trades.
+
+============================================================================
+  TEST 1: CONTINUOUS SWEEP DEPTH BUCKETS
+  Question: Does PF improve monotonically as sweep depth increases?
+============================================================================
+
+  Threshold        Trades  Long Short      PF     WR  Avg Pips      Total $  MaxDD%
+  --------------------------------------------------------------------------
+  No filter           400   210   190    0.81   40%     -0.91      -35,595   42.8%
+  sweep >= 0.50        88    46    42    0.88   40%     -0.38       -5,263   10.2%
+  sweep >= 0.75        38    17    21    0.90   42%     -0.05       -1,947    6.4%
+  sweep >= 1.00        14     7     7    0.62   29%     -3.17       -3,454    4.1%
+  sweep >= 1.25        11     6     5    0.81   36%     -0.63       -1,382    3.1%
+
+  Exit Reason Breakdown:
+
+    No filter:
+      profit_target   :  83 ( 20.8%)  avg  +23.53 pips  total $    +110,711
+      stop_loss       : 179 ( 44.8%)  avg  -14.97 pips  total $    -163,772
+      time_exit       : 138 ( 34.5%)  avg   +2.64 pips  total $     +17,466
+
+    sweep >= 0.50:
+      profit_target   :  22 ( 25.0%)  avg  +22.24 pips  total $     +31,995
+      stop_loss       :  40 ( 45.5%)  avg  -15.31 pips  total $     -40,947
+      time_exit       :  26 ( 29.5%)  avg   +3.43 pips  total $      +3,688
+
+    sweep >= 0.75:
+      profit_target   :  10 ( 26.3%)  avg  +23.31 pips  total $     +14,149
+      stop_loss       :  19 ( 50.0%)  avg  -15.75 pips  total $     -19,005
+      time_exit       :   9 ( 23.7%)  avg   +7.12 pips  total $      +2,908
+
+    sweep >= 1.00:
+      profit_target   :   4 ( 28.6%)  avg  +26.12 pips  total $      +5,691
+      stop_loss       :   9 ( 64.3%)  avg  -16.44 pips  total $      -9,081
+      time_exit       :   1 (  7.1%)  avg   -0.90 pips  total $         -65
+
+    sweep >= 1.25:
+      profit_target   :   4 ( 36.4%)  avg  +26.12 pips  total $      +5,749
+      stop_loss       :   7 ( 63.6%)  avg  -15.91 pips  total $      -7,131
+
+  MONOTONICITY CHECK:
+  NO -- PF is non-monotonic across buckets.
+  Values: No filter=0.81, sweep >= 0.50=0.88, sweep >= 0.75=0.90, sweep >= 1.00=0.62, sweep >= 1.25=0.81
+
+
+============================================================================
+  TEST 2: PROFIT BY SWEEP-DEPTH DECILE
+  Metric: abs(entry - liquidity) / atr (enrichment-compatible)
+  Also shows wick penetration depth for cross-reference.
+  Question: Is the sweep-depth to PF relationship structural?
+============================================================================
+
+  Decile     Trades      PF     WR  Avg Pips      Total $ Entry Dist Wick Depth  Avg MAE  Avg MFE
+  --------------------------------------------------------------------------------------------
+  D1             40    0.45   35%     -3.87      -11,007     0.035     0.284   0.965   0.612
+  D2             40    0.98   45%     +1.76         -341     0.099     0.347   0.960   0.942
+  D3             40    0.91   42%     +0.57       -1,286     0.188     0.266   0.893   0.913
+  D4             40    1.02   42%     +0.66         +308     0.279     0.347   0.901   0.949
+  D5             40    0.77   40%     -0.82       -4,255     0.386     0.347   0.957   0.848
+  D6             40    0.89   42%     -0.76       -1,948     0.480     0.302   0.917   0.799
+  D7             40    1.03   42%     +0.06         +533     0.620     0.268   0.943   0.842
+  D8             40    0.53   32%     -3.20      -10,320     0.781     0.297   1.053   0.807
+  D9             40    0.57   35%     -3.53       -8,710     0.994     0.248   1.113   0.797
+  D10            40    1.08   45%     +0.07       +1,431     1.729     0.326   0.900   0.935
+
+  SPEARMAN RANK CORRELATION (Decile Rank vs Sweep Depth Rank):
+    rho = +0.156
+    WEAK positive relationship.
+
+  Exit Reason by Decile:
+
+    D1 (40 trades):
+      Target  :   3 (  7.5%)  avg  +17.92 pips
+      Stop    :  18 ( 45.0%)  avg  -13.43 pips
+      Time    :  19 ( 47.5%)  avg   +1.75 pips
+
+    D2 (40 trades):
+      Target  :   9 ( 22.5%)  avg  +27.32 pips
+      Stop    :  18 ( 45.0%)  avg  -14.69 pips
+      Time    :  13 ( 32.5%)  avg   +6.85 pips
+
+    D3 (40 trades):
+      Target  :   8 ( 20.0%)  avg  +25.20 pips
+      Stop    :  13 ( 32.5%)  avg  -14.58 pips
+      Time    :  19 ( 47.5%)  avg   +0.57 pips
+
+    D4 (40 trades):
+      Target  :  10 ( 25.0%)  avg  +23.20 pips
+      Stop    :  17 ( 42.5%)  avg  -15.04 pips
+      Time    :  13 ( 32.5%)  avg   +3.87 pips
+
+    D5 (40 trades):
+      Target  :   9 ( 22.5%)  avg  +23.36 pips
+      Stop    :  17 ( 42.5%)  avg  -15.12 pips
+      Time    :  14 ( 35.0%)  avg   +1.01 pips
+
+    D6 (40 trades):
+      Target  :   8 ( 20.0%)  avg  +21.95 pips
+      Stop    :  19 ( 47.5%)  avg  -14.95 pips
+      Time    :  13 ( 32.5%)  avg   +5.99 pips
+
+    D7 (40 trades):
+      Target  :  11 ( 27.5%)  avg  +21.57 pips
+      Stop    :  17 ( 42.5%)  avg  -15.59 pips
+      Time    :  12 ( 30.0%)  avg   +2.50 pips
+
+    D8 (40 trades):
+      Target  :   7 ( 17.5%)  avg  +24.39 pips
+      Stop    :  21 ( 52.5%)  avg  -14.73 pips
+      Time    :  12 ( 30.0%)  avg   +0.89 pips
+
+    D9 (40 trades):
+      Target  :   6 ( 15.0%)  avg  +20.57 pips
+      Stop    :  19 ( 47.5%)  avg  -14.10 pips
+      Time    :  15 ( 37.5%)  avg   +0.21 pips
+
+    D10 (40 trades):
+      Target  :  12 ( 30.0%)  avg  +25.22 pips
+      Stop    :  20 ( 50.0%)  avg  -17.24 pips
+      Time    :   8 ( 20.0%)  avg   +5.61 pips
+
+
+============================================================================
+  TEST 3: TIME EXIT DURATION SWEEP
+  Question: How long does the reversal actually take?
+  All tests use sweep >= 0.5 ATR filter, standard exit (1.5 ATR target)
+============================================================================
+
+  Max Bars     Trades      PF     WR  Avg Pips      Total $  MaxDD% Target%   Stop%   Time%
+  --------------------------------------------------------------------------------------
+  4 bars           88    0.79   42%     -1.05       -8,886   10.3%   19.3%   42.0%   38.6%
+  6 bars           88    0.88   40%     -0.38       -5,263   10.2%   25.0%   45.5%   29.5%
+  8 bars           88    0.86   43%     -0.76       -6,504   10.5%   26.1%   50.0%   23.9%
+  10 bars          88    0.89   42%     -0.61       -5,320   11.2%   28.4%   50.0%   21.6%
+  12 bars          88    0.88   44%     -0.70       -5,720   12.0%   29.5%   51.1%   19.3%
+  4 bars (no target)     88    0.86   42%     -0.36       -5,953   10.5%    0.0%   42.0%   58.0%
+  6 bars (no target)     88    1.09   38%     +1.10       +4,068   10.1%    0.0%   46.6%   53.4%
+  8 bars (no target)     88    1.06   40%     +1.02       +3,227   11.7%    0.0%   52.3%   47.7%
+  10 bars (no target)     88    1.04   39%     +0.80       +1,767   13.0%    0.0%   52.3%   47.7%
+  12 bars (no target)     88    0.97   39%     +0.51       -1,513   14.8%    0.0%   54.5%   45.5%
+
+  BEST PF: 6 bars (no target) (PF 1.09, P&L $+4,068)
+
+  Time Exit P&L by Duration:
+
+    4 bars      :  34 time exits, avg   +2.51 pips, total $      +3,957
+    6 bars      :  26 time exits, avg   +3.43 pips, total $      +3,688
+    8 bars      :  21 time exits, avg   +5.07 pips, total $      +4,962
+    10 bars     :  19 time exits, avg   +4.31 pips, total $      +3,377
+    12 bars     :  17 time exits, avg   +3.56 pips, total $      +2,579
+    4 bars (no target):  51 time exits, avg  +10.26 pips, total $     +31,342
+    6 bars (no target):  47 time exits, avg  +15.31 pips, total $     +47,668
+    8 bars (no target):  42 time exits, avg  +18.85 pips, total $     +51,495
+    10 bars (no target):  42 time exits, avg  +18.38 pips, total $     +49,029
+    12 bars (no target):  40 time exits, avg  +19.48 pips, total $     +47,315
+
+
+============================================================================
+  TEST 4: MAE/MFE ANALYSIS
+  Question: Is the stop too tight? Target too ambitious?
+  How much reversal actually occurs before the trade resolves?
+============================================================================
+
+  --- ALL 400 TRADES (no filter) (400 trades) ---
+
+  Statistic                     MAE (ATR)  MFE (ATR)  MAE (pips)  MFE (pips)
+  ------------------------------------------------------------------------
+  Mean                              0.960      0.844      +14.6      +13.0
+  Median                            0.911      0.617      +12.9       +8.8
+  Std Dev                           0.657      0.768      +11.2      +12.9
+  25th pctile                       0.439      0.252       +6.2       +3.8
+  75th pctile                       1.305      1.289      +20.2      +19.2
+  90th pctile                       1.773      1.840      +29.0      +29.9
+  95th pctile                       2.251      2.120      +34.3      +38.7
+  Max                               4.000      4.877      +74.1      +68.5
+
+  DIAGNOSTIC QUESTIONS:
+    Q: How often did price move >= 1.0 ATR against us (touch stop zone)?
+    A: 45.5% of trades (182 / 400)
+
+    Q: How often did price move >= 1.5 ATR in our favor (reach target zone)?
+    A: 20.8% of trades (83 / 400)
+
+    Q: How often did price move >= 1.0 ATR in our favor?
+    A: 33.2% of trades (133 / 400)
+
+    Q: Average MFE (how far does price actually go in our favor)?
+    A: 0.844 ATR
+
+  MAE/MFE BY EXIT REASON:
+
+  Exit Reason        Count  Avg MAE  Avg MFE   Avg PnL     WR
+  --------------------------------------------------------
+  profit_target         83   0.444   2.037   +23.53  100%
+  stop_loss            179   1.494   0.341   -14.97    0%
+  time_exit            138   0.579   0.781    +2.64   57%
+
+  --- FILTERED (sweep >= 0.5) (88 trades) ---
+
+  Statistic                     MAE (ATR)  MFE (ATR)  MAE (pips)  MFE (pips)
+  ------------------------------------------------------------------------
+  Mean                              0.932      0.903      +14.6      +14.0
+  Median                            0.897      0.662      +12.7      +11.3
+  Std Dev                           0.592      0.727      +11.9      +13.0
+  25th pctile                       0.567      0.318       +6.8       +4.2
+  75th pctile                       1.172      1.471      +17.9      +19.8
+  90th pctile                       1.773      1.865      +25.9      +28.6
+  95th pctile                       2.036      2.111      +32.6      +34.2
+  Max                               3.104      3.463      +72.7      +68.5
+
+  DIAGNOSTIC QUESTIONS:
+    Q: How often did price move >= 1.0 ATR against us (touch stop zone)?
+    A: 45.5% of trades (40 / 88)
+
+    Q: How often did price move >= 1.5 ATR in our favor (reach target zone)?
+    A: 25.0% of trades (22 / 88)
+
+    Q: How often did price move >= 1.0 ATR in our favor?
+    A: 40.9% of trades (36 / 88)
+
+    Q: Average MFE (how far does price actually go in our favor)?
+    A: 0.903 ATR
+
+  MAE/MFE BY EXIT REASON:
+
+  Exit Reason        Count  Avg MAE  Avg MFE   Avg PnL     WR
+  --------------------------------------------------------
+  profit_target         22   0.427   1.931   +22.24  100%
+  stop_loss             40   1.425   0.384   -15.31    0%
+  time_exit             26   0.600   0.831    +3.43   50%
+
+  --- WINNER vs LOSER CHARACTERISTICS ---
+
+  ALL TRADES (161 winners / 239 losers):
+  Characteristic                      Winners       Losers        Delta
+  --------------------------------------------------------------------
+  Avg Entry Dist (ATR)                 0.587       0.540      +0.047
+  Avg Wick Depth (ATR)                 0.311       0.298      +0.013
+  Avg MAE (ATR)                        0.452       1.303      -0.851
+  Avg MFE (ATR)                        1.508       0.397      +1.111
+  Avg MAE (pips)                         7.2        19.5       -12.4
+  Avg MFE (pips)                        23.6         6.0       +17.6
+  Avg Bars Held                          4.4         3.1        +1.3
+  Avg Reversal Distance                  1.0         0.8        +0.2
+  MFE/MAE Ratio                        3.337       0.305      +3.032
+
+  FILTERED (35 winners / 53 losers):
+  Characteristic                      Winners       Losers        Delta
+  --------------------------------------------------------------------
+  Avg Entry Dist (ATR)                 0.592       0.541      +0.052
+  Avg Wick Depth (ATR)                 0.778       0.817      -0.039
+  Avg MAE (ATR)                        0.452       1.248      -0.797
+  Avg MFE (ATR)                        1.558       0.470      +1.088
+  Avg MAE (pips)                         7.2        19.5       -12.2
+  Avg MFE (pips)                        24.0         7.4       +16.7
+  Avg Bars Held                          4.1         3.2        +0.9
+  Avg Reversal Distance                  1.2         0.8        +0.3
+  MFE/MAE Ratio                        3.450       0.376      +3.073
+
+  --- MAE/MFE BY SWEEP DEPTH BUCKET (all 400 trades) ---
+
+  Sweep Bucket           N  Avg MAE  Med MAE  Avg MFE  Med MFE  MFE/MAE      PF
+  ------------------------------------------------------------------
+  0.00-0.25            216   0.966   0.906   0.824   0.587     0.85    0.80
+  0.25-0.50            105   1.012   1.002   0.823   0.606     0.81    0.68
+  0.50-0.75             46   0.878   0.797   0.876   0.617     1.00    0.90
+  0.75-1.00             22   0.726   0.844   1.035   0.889     1.43    1.29
+  1.00-1.50              8   1.130   0.955   1.007   0.844     0.89    1.07
+  1.50-2.00              3   1.310   1.112   0.720   0.035     0.55    0.68
+  2.00+                  0      ---      ---      ---      ---      ---     ---
+

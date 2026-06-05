@@ -1,0 +1,83 @@
+========================================================================
+  EXPERIMENT A: Sweep Depth Filter
+  Question: Are shallow sweeps responsible for most losses?
+========================================================================
+
+  Metric                      No Filter   sweep >= 0.5          Delta
+  ----------------------------------------------------------------
+  Trades                            400             88           -312
+  Profit Factor                    0.81           0.88          +0.08
+  Win Rate                         0.40           0.40          -0.00
+  Avg P&L (pips)                  -0.91          -0.38          +0.52
+  Total P&L ($)               -35594.52       -5263.50      +30331.02
+  Max Drawdown (%)                42.75          10.17         -32.58
+  Expectancy ($)                 -88.99         -59.81         +29.17
+
+  Exit Reason Breakdown:
+
+    No Filter:
+      profit_target   :  83 ( 20.8%)  avg  +23.53 pips  total $    +110,711
+      stop_loss       : 179 ( 44.8%)  avg  -14.97 pips  total $    -163,772
+      time_exit       : 138 ( 34.5%)  avg   +2.64 pips  total $     +17,466
+
+    sweep >= 0.5:
+      profit_target   :  22 ( 25.0%)  avg  +22.24 pips  total $     +31,995
+      stop_loss       :  40 ( 45.5%)  avg  -15.31 pips  total $     -40,947
+      time_exit       :  26 ( 29.5%)  avg   +3.43 pips  total $      +3,688
+
+  CONCLUSION:
+  INCONCLUSIVE -- filter did not push PF above 1.0.
+  The monotonic sweep-depth relationship may not be exploitable as a filter.
+
+========================================================================
+  EXPERIMENT B: Exit Strategy Comparison (on filtered signals)
+  Question: Which exit strategy captures the reversal edge best?
+========================================================================
+
+  Variant                Trades      PF     WR  Avg Pips      Total $  MaxDD%
+  ------------------------------------------------------------------------
+  1.5 ATR target             88    0.88   40%     -0.38       -5,263   10.2%
+  1.0 ATR target             88    0.97   49%     +0.53       -1,005    7.8%
+  Trailing 1.0 ATR           88    0.49   34%     -2.38      -16,705   16.7%
+  Time-only exit             88    1.09   38%     +1.10       +4,068   10.1% <<<
+
+  Exit Type Breakdown per Variant:
+
+  1.5 ATR target:
+    profit_target   :  22 ( 25.0%)  avg  +22.24 pips  total $     +31,995
+    stop_loss       :  40 ( 45.5%)  avg  -15.31 pips  total $     -40,947
+    time_exit       :  26 ( 29.5%)  avg   +3.43 pips  total $      +3,688
+
+  1.0 ATR target:
+    profit_target   :  36 ( 40.9%)  avg  +15.30 pips  total $     +34,991
+    stop_loss       :  35 ( 39.8%)  avg  -15.34 pips  total $     -36,349
+    time_exit       :  17 ( 19.3%)  avg   +1.92 pips  total $        +354
+
+  Trailing 1.0 ATR:
+    time_exit       :  11 ( 12.5%)  avg  +10.73 pips  total $      +5,702
+    trailing_stop   :  77 ( 87.5%)  avg   -4.25 pips  total $     -22,407
+
+  Time-only exit:
+    stop_loss       :  41 ( 46.6%)  avg  -15.20 pips  total $     -43,599
+    time_exit       :  47 ( 53.4%)  avg  +15.31 pips  total $     +47,668
+
+  BEST EXIT: Time-only exit (PF 1.09)
+
+
+
+========================================================================
+  METHODOLOGY NOTE
+========================================================================
+
+  These experiments test a single causal variable (sweep depth)
+  identified from regime analysis. They do NOT optimize parameters.
+
+  Experiment A asks: are shallow sweeps noise, not signal?
+    - If PF crosses 1.0 with filter, the hypothesis is supported.
+    - If PF stays below 1.0, the sweep-depth relationship may be
+      a descriptive artifact, not an exploitable filter.
+
+  Experiment B asks: given filtered signals, what's the right
+    way to harvest the reversal? This tests exit logic,
+    not entry logic. The time-exit data (+2.64 pips avg)
+    suggests the current 1.5 ATR target may be too ambitious.

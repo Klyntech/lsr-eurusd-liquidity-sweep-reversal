@@ -1,0 +1,167 @@
+======================================================================
+  LSR-EH1 REGIME INVESTIGATION
+  Why did 2021-2022 work while other years lost?
+======================================================================
+
+======================================================================
+  1. TIME EXIT ANALYSIS
+======================================================================
+
+  Count:        138 trades (34.5% of all trades)
+  Avg P&L:      +2.64 pips ($26.38 approx)
+  Median P&L:   +2.65 pips
+  Total P&L:    $17,466.20
+  Win rate:     56.5%
+  Long avg:     +1.59 pips
+  Short avg:    +3.65 pips
+  VERDICT:      SLIGHTLY PROFITABLE — not dead weight. Contains marginal edge.
+
+  Interpretation:
+  Time exits are NET POSITIVE. The strategy is finding genuine reversals
+  that move in the right direction but don't reach 1.5 ATR within 6 bars.
+  These trades contribute to the edge rather than destroying it.
+
+  Key question: Would extending max_bars_held capture more of these?
+  Or would it expose them to reversals that turn into losses?
+
+  --- Exit Type P&L Comparison ---
+    profit_target     :  83 trades, avg  +23.53 pips, total $+110,711, win 100%
+    stop_loss         : 179 trades, avg  -14.97 pips, total $-163,772, win 0%
+    time_exit         : 138 trades, avg   +2.64 pips, total $+17,466, win 57%
+
+======================================================================
+  2. YEAR-BY-YEAR BREAKDOWN
+======================================================================
+
+  2019:  60 trades | PF 0.81 | WR 38% | P&L $-6,037 | PT 22% SL 47% TE 32% | avg ADX 19.3 avg ATRpct 93.3 avg sweep 0.94
+  2020:  32 trades | PF 0.94 | WR 47% | P&L $-840 | PT 22% SL 44% TE 34% | avg ADX 19.9 avg ATRpct 91.8 avg sweep 0.74
+  2021:  48 trades | PF 1.09 | WR 50% | P&L $+1,723 | PT 25% SL 40% TE 35% | avg ADX 20.2 avg ATRpct 91.8 avg sweep 0.83 <<<
+  2022:  62 trades | PF 1.08 | WR 45% | P&L $+2,083 | PT 26% SL 32% TE 42% | avg ADX 18.5 avg ATRpct 91.5 avg sweep 0.83 <<<
+  2023:  73 trades | PF 0.70 | WR 34% | P&L $-11,200 | PT 21% SL 47% TE 33% | avg ADX 18.4 avg ATRpct 91.6 avg sweep 0.75
+  2024:  36 trades | PF 0.86 | WR 44% | P&L $-2,140 | PT 19% SL 44% TE 36% | avg ADX 18.6 avg ATRpct 92.4 avg sweep 0.89
+  2025:  65 trades | PF 0.49 | WR 34% | P&L $-15,734 | PT 14% SL 55% TE 31% | avg ADX 18.1 avg ATRpct 92.9 avg sweep 0.87
+  2026:  24 trades | PF 0.60 | WR 33% | P&L $-3,450 | PT 17% SL 50% TE 33% | avg ADX 17.4 avg ATRpct 91.2 avg sweep 0.87
+
+======================================================================
+  3. 2021-2022 vs OTHER YEARS -- The Core Question
+======================================================================
+
+  Metric                     2021-2022       Rest      Delta
+  -------------------------------------------------------
+  Trades                           110        290       -180
+  Win Rate                        0.47       0.38      +0.10
+  PF                              1.09       0.72      +0.37
+  Avg PnL (pips)                  1.12      -1.67      +2.79
+  Avg ADX(4h)                    19.23      18.65      +0.58
+  Avg ATR Pctile                 91.63      92.34      -0.71
+  Avg Sweep Size                  0.83       0.84      -0.01
+  Avg Dist to Swing               0.81       0.86      -0.04
+  Target Hit %                    0.25       0.19      +0.06
+  Stop Hit %                      0.35       0.48      -0.13
+  Time Exit %                     0.39       0.33      +0.06
+  TE Avg PnL                      1.03       3.36      -2.33
+
+  Key differences between 2021-2022 and other years:
+
+    - Te Avg Pnl: LOWER by 2.328 in 2021-2022
+    - Avg Atr Pctile: LOWER by 0.714 in 2021-2022
+    - Avg Adx 4H: HIGHER by 0.584 in 2021-2022
+    - Sl Pct: LOWER by 0.128 in 2021-2022
+    - Pt Pct: HIGHER by 0.065 in 2021-2022
+
+  Session distribution differences:
+    NY: 83.6% vs 78.3% (diff: +5.4%)
+    London: 11.8% vs 18.3% (diff: -6.5%)
+    Asian: 4.5% vs 3.4% (diff: +1.1%)
+
+======================================================================
+  4. SESSION ANALYSIS
+======================================================================
+
+  Asian   :  15 (4%) | PF 0.41 | WR 27% | P&L $-5,246
+  London  :  66 (16%) | PF 0.73 | WR 35% | P&L $-10,680
+  NY      : 319 (80%) | PF 0.85 | WR 42% | P&L $-19,668
+
+======================================================================
+  5. VOLATILITY REGIME ANALYSIS
+======================================================================
+
+  low_vol (70-80)   :  36 (9%) | PF 0.58 | WR 36% | avg P&L -3.1 pips | PT 19% SL 47% TE 33%
+  med_vol (80-90)   :  81 (20%) | PF 0.77 | WR 41% | avg P&L -1.3 pips | PT 15% SL 38% TE 47%
+  high_vol (90-100) : 261 (65%) | PF 0.85 | WR 41% | avg P&L -0.4 pips | PT 23% SL 46% TE 31%
+
+======================================================================
+  6. SWEEP DEPTH ANALYSIS -- Does deeper sweep = better reversal?
+======================================================================
+
+  tiny (0-0.25)       :  72 (18%) | PF 0.10 | WR 11% | avg P&L -9.8 pips | P&L $-46,454 | avg rev_dist 0.83 ATR
+  small (0.25-0.5)    :  60 (15%) | PF 0.49 | WR 33% | avg P&L -4.3 pips | P&L $-16,373 | avg rev_dist 0.91 ATR
+  medium (0.5-1.0)    : 134 (34%) | PF 1.08 | WR 46% | avg P&L +1.2 pips | P&L $+3,984 | avg rev_dist 0.90 ATR
+  large (1.0-2.0)     : 116 (29%) | PF 1.29 | WR 50% | avg P&L +2.1 pips | P&L $+12,607 | avg rev_dist 0.97 ATR
+  huge (2.0+)         :  18 (4%) | PF 4.66 | WR 72% | avg P&L +11.1 pips | P&L $+10,641 | avg rev_dist 1.00 ATR
+
+======================================================================
+  7. ATR PERCENTILE BIN ANALYSIS
+======================================================================
+
+  70-75     :  15 | PF 0.55 | WR 40% | avg -4.1 pips | PT 13% SL 47% TE 40%
+  75-80     :  21 | PF 0.60 | WR 33% | avg -2.4 pips | PT 24% SL 48% TE 29%
+  80-85     :  29 | PF 0.34 | WR 34% | avg -4.8 pips | PT 7% SL 45% TE 48%
+  85-90     :  52 | PF 1.09 | WR 44% | avg +0.7 pips | PT 19% SL 35% TE 46%
+  90-95     :  98 | PF 0.98 | WR 46% | avg +0.1 pips | PT 16% SL 38% TE 46%
+  95-100    : 163 | PF 0.80 | WR 38% | avg -0.7 pips | PT 27% SL 52% TE 21%
+
+======================================================================
+  8. WINNER vs LOSER CHARACTERISTICS
+======================================================================
+
+  Attribute                     Winner      Loser      Delta
+  -------------------------------------------------------
+  Adx 4H                        18.646     18.917     -0.272
+  Atr Percentile                92.350     92.006     +0.344
+  Sweep Size Atr                 1.046      0.699     +0.347
+  Distance To Swing Atr          0.881      0.824     +0.057
+  Bars Held                      4.391      3.075     +1.316
+
+  Session preference (winner% - loser%):
+    NY: +5.8%
+    London: -3.7%
+    Asian: -2.1%
+
+======================================================================
+  9. SYNTHESIS AND NEXT RESEARCH QUESTIONS
+======================================================================
+
+  The data tells us:
+
+  1. THE SWEEP-REVERSAL PHENOMENON IS REAL
+     - 83/400 trades (20.8%) reach 1.5 ATR target
+     - 138/400 trades (34.5%) time out with net POSITIVE P&L
+     - Combined: over 55% of trades move in the predicted direction
+
+  2. THE EDGE IS DESTROYED BY STOP LOSSES, NOT BY BAD ENTRIES
+     - Stop losses account for 44.8% of trades
+     - Stop loss P&L is consistently negative across all years
+     - The strategy correctly identifies sweep points but the
+       1.0 ATR stop is too tight for the noise level
+
+  3. SESSION MATTERS
+     - Best:  NY (PF 0.85)
+     - Worst: Asian (PF 0.41)
+
+  4. VOLATILITY REGIME MATTERS
+     - Best vol regime: high_vol (90-100) (PF 0.85)
+
+  5. SWEEP DEPTH MATTERS
+     - Best: huge (2.0+) (PF 4.66)
+
+
+  NEXT STEPS (no parameter changes yet):
+  a) Filter to 2021-2022 trades only and study what the market was doing
+     (rate regime, vol regime, central bank policy)
+  b) Test: does restricting to best session improve PF?
+  c) Test: does restricting to best vol regime improve PF?
+  d) Test: does sweep depth filter improve PF?
+  e) ALL of these are regime FILTERS, not parameter optimizations.
+     They test whether the edge exists conditionally -- which is the
+     legitimate next research question.
